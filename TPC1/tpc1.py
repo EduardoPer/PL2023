@@ -83,6 +83,8 @@ byGender = dict()#SO DOENTES
 byGender['M'] = [] 
 byGender['F'] = []
 byColesterolLevel = dict()#SO DOENTES
+byColesterolLevelCount = dict()#SO DOENTES
+allColesterolLevelCount = dict()
 
 
 
@@ -133,15 +135,52 @@ def defColesterolLevels(lines : list[str]):
     min2 = min
     max2 = max
     while min2 < max2:
-        aux = str(min2) + '-' + str(min2+9)
+        aux = getEscalaoColesterol(min2)
         byColesterolLevel[aux] = []
+        byColesterolLevelCount[aux] = 0
         min2 = min2 + 10
-'''#TODO
+        
+def getEscalaoColesterol(n : int):
+    r = ''
+    if n%10 == 0:
+        r = str(n) + '-' + str(n+9)
+    else:
+        aux1 = n
+        aux2 = n
+        while(1):
+            aux1 -=1
+            aux2 +=1
+            if(aux1%10==0):
+                r = getEscalaoColesterol(aux1)
+                break
+            elif(aux2+1%10==0):
+                r = getEscalaoColesterol(aux2)
+                break
+        
+    return r
+
 def distByColesterol(lines : list[str]):
     for i in range(1,len(lines)):
         line = lines[i]
         pessoa = doente.toDoente(line)
-'''    
+        
+        if allColesterolLevelCount.get(getEscalaoColesterol(pessoa.getColesterol())) is None:
+            allColesterolLevelCount[getEscalaoColesterol(pessoa.getColesterol())] = 1
+        else:
+            aux = int()
+            aux = allColesterolLevelCount.get(getEscalaoColesterol(pessoa.getColesterol()))
+            aux+=1
+            allColesterolLevelCount[getEscalaoColesterol(pessoa.getColesterol())] = aux
+        
+        if pessoa.getTemDoenca():
+            aux = list()
+            aux = byColesterolLevel.get(getEscalaoColesterol(pessoa.getColesterol()))
+            aux.append(pessoa)
+            byColesterolLevel[getEscalaoColesterol(pessoa.getColesterol())] = aux
+            
+            aux = int()
+            aux = byColesterolLevelCount.get(getEscalaoColesterol(pessoa.getColesterol()))
+            byColesterolLevelCount[getEscalaoColesterol(pessoa.getColesterol())] = aux + 1
 
 def distByGender(lines : list[str]):
     for i in range(1,len(lines)):
@@ -166,6 +205,13 @@ def printFaixaEtariaTable():
             print(f"|{key}| -> Total: {allFaixaEtariaCount.get(key)} -> Doentes: 0")
         else:
             print(f"|{key}| -> Total: {allFaixaEtariaCount.get(key)} -> Doentes: {byFaixaEtariaCount.get(key)}")
+            
+def printColesterolTable():
+    for key in allColesterolLevelCount.keys():
+        if byColesterolLevel.get(key) is None:
+            print(f"|{key}| -> Total: {allColesterolLevelCount.get(key)} -> Doentes: 0")
+        else:
+            print(f"|{key}| -> Total: {allColesterolLevelCount.get(key)} -> Doentes: {byColesterolLevelCount.get(key)}")
 
 def printGenderTable(nMasc, nMascD, nFem, nFemD):
     print(f"|Masculino| -> Total: {nMasc} -> Doentes: {nMascD}")
@@ -199,13 +245,15 @@ def main():
     distByGender(lines)
     (nFemD, nMascD) = getCountFemMascDoentes()
     defColesterolLevels(lines)
+    distByColesterol(lines)
     #print(str(byColesterolLevel.keys()))
     
     #print(f"Total de pessoas: {n}\n    Total de pessoas doentes: {nMascD+nFemD}\nTotal de Homens: {nMasc}\n    Total de Homens doentes: {nMascD}\nTotal de Mulheres: {nFem}\n    Total de Mulheres Doentes: {nFemD}")
     printGenderTable(nMasc, nMascD, nFem, nFemD)
     print("\n\n")
     printFaixaEtariaTable()
-    
+    print("\n\n")
+    printColesterolTable()
     
         
         
