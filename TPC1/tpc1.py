@@ -75,7 +75,7 @@ class doente:
     
     def getTemDoenca(self):
         return self.temDoenca
-
+all = list()
 allFaixaEtariaCount = dict()
 byFaixaEtaria = dict()#SO DOENTES
 byFaixaEtariaCount = dict()#SO DOENTES
@@ -86,7 +86,10 @@ byColesterolLevel = dict()#SO DOENTES
 byColesterolLevelCount = dict()#SO DOENTES
 allColesterolLevelCount = dict()
 
-
+def loadAllPeople(lines : list[str]):
+    for i in range(1,len(lines)):
+        pessoa = doente.toDoente(lines[i])
+        all[i] = pessoa
 
 def distByEscalaoEtario(lines : list[str]):
     for i in range(1,len(lines)):
