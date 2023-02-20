@@ -219,7 +219,33 @@ def printColesterolTable():
 def printGenderTable(nMasc, nMascD, nFem, nFemD):
     print(f"|Masculino| -> Total: {nMasc} -> Doentes: {nMascD}")
     print(f"|Feminino| -> Total: {nFem} -> Doentes: {nFemD}")
+    
+def printFaixaEtariaTable_csv():
+    f = open("dist_fe.csv",'w')
+    f.write('Faixa Etaria;Total;Doentes\n')
+    for key in allFaixaEtariaCount.keys():
+        if byFaixaEtariaCount.get(key) is None:
+            f.write(f"{key};{allFaixaEtariaCount.get(key)};0\n")
+        else:
+            f.write(f"{key};{allFaixaEtariaCount.get(key)};{byFaixaEtariaCount.get(key)}\n")
+    f.close()
 
+def printColesterolTable_csv():
+    f = open('dist_colesterol.csv','w')
+    f.write('Nivel Colesterol;Total;Doentes\n')
+    for key in allColesterolLevelCount.keys():
+        if byColesterolLevel.get(key) is None:
+            print(f"{key};{allColesterolLevelCount.get(key)};0\n")
+        else:
+            print(f"{key};{allColesterolLevelCount.get(key)};{byColesterolLevelCount.get(key)}\n")
+    f.close()
+
+def printGenderTable_csv(nMasc, nMascD, nFem, nFemD):
+    f = open("dist_gender.csv","w")
+    f.write('Genero;Total;Doentes\n')
+    f.write(f"Masculino;{nMasc};{nMascD}\n")
+    f.write(f"Feminino;{nFem};{nFemD}\n")
+    f.close()
 
 def main():
     filepath = input("Localizacao do ficheiro .csv: ")
