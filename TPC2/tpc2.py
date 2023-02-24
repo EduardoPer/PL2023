@@ -68,8 +68,8 @@ def somadorOnOff(string : str):
    
 
 def main():
-    testString = 'on123off456on7off123on10=off'
-    testString2 = 'onoff!123?'
+    #testString = 'on123off456on7off123on10=off'
+    #testString2 = 'onoff!123?'
     #teste da função getNextAndRest
     #(res,resto) = getNextAndRest(testString)
     #print(res + ' ' + resto)
@@ -78,8 +78,8 @@ def main():
     
     
     #teste da função somadorOnOff
-    s = somadorOnOff(testString)
-    print('Para a string < ' + testString + ' > a soma é ' + str(s))
+    s = input('Introduza uma string para o somador on/off: ')
+    print('Para a string < ' + s + ' > a soma é ' + str(somadorOnOff(s)))
     
     #print('doing stuff. chill out! w8 a little longer m8!')
    
