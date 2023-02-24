@@ -13,7 +13,13 @@ def getNextAndRest(string : str):
             ver = False
         elif isDigitIndex(string,i):
             res = res + string[i]
-            if not isDigitIndex(string, i+1):
+            if i+1 < len(string) and not isDigitIndex(string, i+1):
+                i+=1
+                ver = False
+            elif i+1 < len(string) and isDigitIndex(string, i+1):
+                i+=1
+            elif i+1>=len(string):
+                i = len(string)
                 ver = False
         else:
             if i+1 < len(string) and string[i].upper() + string[i+1].upper() == 'ON':
@@ -26,7 +32,13 @@ def getNextAndRest(string : str):
                 ver = False
             elif (not isDigitIndex(string,i)):
                 res = res = res + string[i]
-                if isDigitIndex(string, i+1):
+                if i+1 < len(string) and isDigitIndex(string, i+1):
+                    i+=1
+                    ver = False
+                elif i+1 < len(string) and (not isDigitIndex(string, i+1)):
+                    i+=1
+                elif i+1>=len(string):
+                    i = len(string)
                     ver = False
                 
                     
@@ -40,7 +52,6 @@ def somadorOnOff(string : str):
     state = 'OFF'
     while aux != '':
         (r,aux) = getNextAndRest(aux)
-        print(r + ' ' + aux)
         if state == 'OFF':
             if r == 'ON':
                 state = r
@@ -57,17 +68,18 @@ def somadorOnOff(string : str):
    
 
 def main():
-    testString = 'on123off456on7=off'
+    testString = 'on123off456on7off123on10=off'
     testString2 = 'onoff!123?'
     #teste da função getNextAndRest
-    (res,resto) = getNextAndRest(testString)
-    print(res + ' ' + resto)
-    (res,resto) = getNextAndRest(resto)
-    print('\n' + res + ' ' + resto)
+    #(res,resto) = getNextAndRest(testString)
+    #print(res + ' ' + resto)
+    #(res,resto) = getNextAndRest(resto)
+    #print('\n' + res + ' ' + resto)
+    
     
     #teste da função somadorOnOff
-    #s = somadorOnOff(testString)
-    #print('Para a string < ' + testString + ' > a soma é ' + str(s))
+    s = somadorOnOff(testString)
+    print('Para a string < ' + testString + ' > a soma é ' + str(s))
     
     #print('doing stuff. chill out! w8 a little longer m8!')
    
