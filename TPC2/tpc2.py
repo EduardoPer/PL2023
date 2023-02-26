@@ -11,6 +11,9 @@ def getNextAndRest(string : str):
             res = '='
             i+=1
             ver = False
+        elif i+1 < len(string) and string[i] == '-' and isDigitIndex(string, i+1):
+            res = res + string[i]
+            i+=1
         elif isDigitIndex(string,i):
             res = res + string[i]
             if i+1 < len(string) and not isDigitIndex(string, i+1):
@@ -59,7 +62,16 @@ def somadorOnOff(string : str):
             if r == 'OFF':
                 state = r
             elif r.isdigit():
+                print(r)
                 sum += int(r)
+            elif (not r.isdigit()):
+                if(r[0] == '-'):
+                    restor = ''
+                    for i in range(1,len(r)):
+                        restor = restor + r[i]
+                    print(restor)
+                    if(restor.isdigit()):
+                        sum-= int(restor)
             elif r == '=':
                 break
     
@@ -79,6 +91,7 @@ def main():
     
     #teste da função somadorOnOff
     s = input('Introduza uma string para o somador on/off: ')
+    
     print('Para a string < ' + s + ' > a soma é ' + str(somadorOnOff(s)))
     
     #print('doing stuff. chill out! w8 a little longer m8!')
