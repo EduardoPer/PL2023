@@ -78,7 +78,6 @@ def somadorOnOff(string : str):
     return sum
             
    
-
 def main():
     #testString = 'on123off456on7off123on10=off'
     #testString2 = 'onoff!123?'
