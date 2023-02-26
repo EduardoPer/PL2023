@@ -55,25 +55,25 @@ def somadorOnOff(string : str):
     state = 'OFF'
     while aux != '':
         (r,aux) = getNextAndRest(aux)
-        if state == 'OFF':
+        if r == '=':
+            print(str(sum))
+        elif state == 'OFF':
             if r == 'ON':
                 state = r
-        else:
+        elif state == 'ON':
             if r == 'OFF':
                 state = r
             elif r.isdigit():
-                print(r)
+                #print(r)
                 sum += int(r)
             elif (not r.isdigit()):
                 if(r[0] == '-'):
                     restor = ''
                     for i in range(1,len(r)):
                         restor = restor + r[i]
-                    print(restor)
+                    #print(restor)
                     if(restor.isdigit()):
                         sum-= int(restor)
-            elif r == '=':
-                break
     
     return sum
             
