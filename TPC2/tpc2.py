@@ -52,7 +52,7 @@ def getNextAndRest(string : str):
 def somadorOnOff(string : str):
     aux = string
     sum = 0
-    state = 'OFF'
+    state = 'ON'
     while aux != '':
         (r,aux) = getNextAndRest(aux)
         if r == '=':
@@ -90,8 +90,9 @@ def main():
     
     #teste da função somadorOnOff
     s = input('Introduza uma string para o somador on/off: ')
+    r = somadorOnOff(s)
     
-    print('Para a string < ' + s + ' > a soma é ' + str(somadorOnOff(s)))
+    #print('Para a string < ' + s + ' > a soma é ' + str(somadorOnOff(s)))
     
     #print('doing stuff. chill out! w8 a little longer m8!')
    
