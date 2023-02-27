@@ -87,7 +87,6 @@ def main():
     #(res,resto) = getNextAndRest(resto)
     #print('\n' + res + ' ' + resto)
     
-    
     #teste da função somadorOnOff
     s = input('Introduza uma string para o somador on/off: ')
     r = somadorOnOff(s)
