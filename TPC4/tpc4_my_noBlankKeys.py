@@ -101,6 +101,7 @@ def csvToJson(lines : list[str]):
             for j in range(0,len(aux)):
                 if '{' in headers[j]:
                     nome = (re.split(r"[{]",headers[j]))[0]
+                    nome = nome + '_sum'
                     total = int((re.split(r"[{}]",headers[j]))[1])
                 if j+1 < len(headers) and headers[j+1] == '' and aux[j] != '':
                     l.append(int(aux[j]))
@@ -136,6 +137,7 @@ def csvToJson(lines : list[str]):
             for j in range(0,len(aux)):
                 if '{' in headers[j]:
                     nome = (re.split(r"[{]",headers[j]))[0]
+                    nome = nome + '_media'
                     total = int((re.split(r"[{}]",headers[j]))[1])
                 if j+1 < len(headers) and headers[j+1] == '' and aux[j] != '':
                     l.append(int(aux[j]))
@@ -171,7 +173,7 @@ def csvToJson(lines : list[str]):
             max = int()
             for j in range(0,len(aux)):
                 if '{' in headers[j]:
-                    nome = (re.split(r"[{]",headers[j]))[0]
+                    nome = (re.split(r"[{]",headers[j]))[0] + '_sum'
                     min = int((re.split(r"[{]",headers[j]))[1])
                 elif '}' in headers[j]:
                     max = int((re.split(r"[}]",headers[j]))[0])
@@ -212,7 +214,7 @@ def csvToJson(lines : list[str]):
             max = int()
             for j in range(0,len(aux)):
                 if '{' in headers[j]:
-                    nome = (re.split(r"[{]",headers[j]))[0]
+                    nome = (re.split(r"[{]",headers[j]))[0] + '_media'
                     min = int((re.split(r"[{]",headers[j]))[1])
                 elif '}' in headers[j]:
                     max = int((re.split(r"[}]",headers[j]))[0])
